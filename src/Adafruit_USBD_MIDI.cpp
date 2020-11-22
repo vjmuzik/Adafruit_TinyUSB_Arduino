@@ -31,7 +31,7 @@
 //--------------------------------------------------------------------+
 #define EPOUT 0x00
 #define EPIN 0x80
-#define EPSIZE 64
+#define EPSIZE 512
 
 Adafruit_USBD_MIDI::Adafruit_USBD_MIDI(void) : _n_cables(1) {}
 

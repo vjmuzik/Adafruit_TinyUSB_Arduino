@@ -23,10 +23,11 @@
  */
 
 #include "Adafruit_USBD_MSC.h"
+#if CFG_TUD_MSC
 
 #define EPOUT 0x00
 #define EPIN 0x80
-#define EPSIZE 64 // TODO must be 512 for highspeed device
+#define EPSIZE 512 // TODO must be 512 for highspeed device
 
 static Adafruit_USBD_MSC *_msc_dev = NULL;
 
@@ -216,3 +217,5 @@ void tud_msc_write10_complete_cb(uint8_t lun) {
 }
 
 } // extern "C"
+
+#endif /* CFG_TUD_MSC */

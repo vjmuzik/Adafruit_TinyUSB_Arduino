@@ -25,7 +25,11 @@
 #ifndef ADAFRUIT_USBD_MIDI_H_
 #define ADAFRUIT_USBD_MIDI_H_
 
-#include "Adafruit_TinyUSB_Core.h"
+#include <Arduino.h>
+#if defined(CORE_TEENSY)
+#include <Adafruit_TinyUSB_TeensyCore.h>
+#endif
+#if CFG_TUD_MIDI
 
 class Adafruit_USBD_MIDI : public Stream, public Adafruit_USBD_Interface {
 public:
@@ -62,4 +66,5 @@ private:
   uint8_t _n_cables;
 };
 
+#endif /* CFG_TUD_MIDI */
 #endif /* ADAFRUIT_USBD_MIDI_H_ */

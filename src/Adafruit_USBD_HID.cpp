@@ -23,6 +23,7 @@
  */
 
 #include "Adafruit_USBD_HID.h"
+#if CFG_TUD_HID
 
 #define EPOUT 0x00
 #define EPIN 0x80
@@ -178,9 +179,9 @@ bool Adafruit_USBD_HID::keyboardPress(uint8_t report_id, char ch) {
   uint8_t keycode[6] = {0};
   uint8_t modifier = 0;
 
-  if (_ascii2keycode[ch][0])
+  if (_ascii2keycode[(uint8_t)ch][0])
     modifier = KEYBOARD_MODIFIER_LEFTSHIFT;
-  keycode[0] = _ascii2keycode[ch][1];
+  keycode[0] = _ascii2keycode[(uint8_t)ch][1];
 
   return tud_hid_keyboard_report(report_id, modifier, keycode);
 }
@@ -218,3 +219,5 @@ bool Adafruit_USBD_HID::mouseButtonPress(uint8_t report_id, uint8_t buttons) {
 bool Adafruit_USBD_HID::mouseButtonRelease(uint8_t report_id) {
   return tud_hid_mouse_report(report_id, 0, 0, 0, 0, 0);
 }
+
+#endif /* CFG_TUD_HID */

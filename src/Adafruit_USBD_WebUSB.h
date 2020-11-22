@@ -25,7 +25,11 @@
 #ifndef ADAFRUIT_USBD_WEBUSB_H_
 #define ADAFRUIT_USBD_WEBUSB_H_
 
-#include "Adafruit_TinyUSB_Core.h"
+#include <Arduino.h>
+#if defined(CORE_TEENSY)
+#include <Adafruit_TinyUSB_TeensyCore.h>
+#endif
+#if CFG_TUD_VENDOR
 
 #define WEBUSB_URL_DEF(_name, _scheme, _url)                                   \
   struct TU_ATTR_PACKED {                                                      \
@@ -78,4 +82,5 @@ private:
                                  tusb_control_request_t const *request);
 };
 
+#endif /* CFG_TUD_VENDOR */
 #endif /* ADAFRUIT_USBD_WEBUSB_H_ */

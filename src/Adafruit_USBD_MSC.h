@@ -25,7 +25,11 @@
 #ifndef ADAFRUIT_USBD_MSC_H_
 #define ADAFRUIT_USBD_MSC_H_
 
-#include "Adafruit_TinyUSB_Core.h"
+#include <Arduino.h>
+#if defined(CORE_TEENSY)
+#include <Adafruit_TinyUSB_TeensyCore.h>
+#endif
+#if CFG_TUD_MSC
 
 class Adafruit_USBD_MSC : public Adafruit_USBD_Interface {
 public:
@@ -109,4 +113,5 @@ private:
   friend void tud_msc_write10_complete_cb(uint8_t lun);
 };
 
+#endif /* CFG_TUD_MSC */
 #endif /* ADAFRUIT_USBD_MSC_H_ */

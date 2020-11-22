@@ -25,7 +25,11 @@
 #ifndef ADAFRUIT_USBD_HID_H_
 #define ADAFRUIT_USBD_HID_H_
 
-#include "Adafruit_TinyUSB_Core.h"
+#include <Arduino.h>
+#if defined(CORE_TEENSY)
+#include <Adafruit_TinyUSB_TeensyCore.h>
+#endif
+#if CFG_TUD_HID
 
 class Adafruit_USBD_HID : public Adafruit_USBD_Interface {
 public:
@@ -94,4 +98,5 @@ private:
   friend uint8_t const *tud_hid_descriptor_report_cb(void);
 };
 
+#endif /* CFG_TUD_HID */
 #endif /* ADAFRUIT_USBD_HID_H_ */
